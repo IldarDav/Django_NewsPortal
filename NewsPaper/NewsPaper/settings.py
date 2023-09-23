@@ -166,10 +166,17 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = 'ildardave'
 EMAIL_HOST_PASSWORD = 'onnjxczaukjtarrp'
 EMAIL_USE_SSL = True
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'ildardave@yandex.ru'
 
 SITE_URL = 'http://127.0.0.1:8000'
 
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 APSCHEDULER_RUN_NOW_TIMEOUT = 25
+
+CELERY_BROKER_URL = 'redis://default:VD38cAy6R1yvu2eGzuT7movhRGOeT2VZ@redis-16135.c302.asia-northeast1-1.gce.cloud.redislabs.com:16135'
+CELERY_RESULT_BACKEND = 'redis://default:VD38cAy6R1yvu2eGzuT7movhRGOeT2VZ@redis-16135.c302.asia-northeast1-1.gce.cloud.redislabs.com:16135'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
+

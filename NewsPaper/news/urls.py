@@ -5,7 +5,7 @@ from .views import PostList, PostDetail, NewsCreate, NewsUpdate, NewsDelete, \
 
 urlpatterns = [
    path('acc/', IndexView.as_view(),name='index'),
-   path('', PostList.as_view(),name='posts_list'),
+   path('posts/', PostList.as_view(),name='posts_list'),
    path('search/', SearchNews.as_view(), name='search'),
    path('<int:pk>/', PostDetail.as_view(),name='post_detail'),
    path('news/create/', NewsCreate.as_view(), name='news_create'),
@@ -16,6 +16,7 @@ urlpatterns = [
    path('article/<int:pk>/delete/', ArticlesDelete.as_view(), name='post_delete'),
    path('upgrade/', upgrade_me, name='upgrade'),
    path('categories/<int:pk>', CategoryListView.as_view(), name='category'),
-   path('categories/<int:pk>/subscribe', subscribe, name='subscribe')
+   path('categories/<int:pk>/subscribe', subscribe, name='subscribe'),
+
 
 ]

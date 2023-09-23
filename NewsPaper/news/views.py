@@ -1,8 +1,10 @@
 from datetime import datetime
 
 from django.core.mail import EmailMultiAlternatives
+from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy, resolve
+from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post, Category, PostCategory
 from .filters import PostFilter
@@ -190,3 +192,5 @@ def subscribe(request, pk):
         except Exception as e:
             print(e)
     return redirect(request.META.get('HTTP_REFERER'))
+
+
