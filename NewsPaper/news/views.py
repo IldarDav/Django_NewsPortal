@@ -14,6 +14,13 @@ from django.views.generic import TemplateView
 from django.shortcuts import redirect, get_object_or_404, render
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_page
+from django.core.cache import cache
+
+
+@cache_page(60*1)
+def main_page(request):
+    return render(request, 'main_page.html')
 
 
 class ProtectedView(LoginRequiredMixin, TemplateView):
@@ -49,6 +56,15 @@ class PostDetail(DetailView):
     model = Post
     template_name = 'post.html'
     context_object_name = 'post'
+
+    def get_object(self, *args, **kwargs):
+        obj = cache.get(f'post-{self.kwargs["pk"]}',
+                        None)
+        if not obj:
+            obj = super().get_object(queryset=self.queryset)
+            cache.set(f'post-{self.kwargs["pk"]}', obj)
+
+        return obj
 
 
 class SearchNews(ListView):
